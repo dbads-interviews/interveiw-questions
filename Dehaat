@@ -1,0 +1,72 @@
+const a = [['a', 2], ['a', 3], ['c', 4]];
+const b = [['a', 4], ['a', 4], ['a', 4], ['c', 3], ['c', 4]];
+
+// map = {
+//   'a': [4],
+//   'c': [3,4]
+// }
+
+map1 = {
+    'a': [2],
+    'b': [3],
+    'c': [4]
+}
+
+map2 = {
+    'a': [4],
+    'c': [3,4]
+}
+
+
+// 2*4 + 4*3 + 4*4
+// 8+12+16
+
+function findSum(arr1, arr2) {
+    const charMapping = {}
+    for (let i=0; i< arr2.length; ++i) {
+        const char = arr2[i][0];
+        if (charMapping[char] !== undefined) {
+            charMapping[char].push(arr2[i][1]);
+        } else {
+            charMapping[char] = [arr2[i][1]]
+        }
+    }
+    
+    let sum = 0;
+    for (let i=0; i<arr1.length; ++i) {
+        const char = arr1[i][0];
+        if (charMapping[char] !== undefined) {
+            const arr3 = charMapping[char];
+            for (let j=0; j<arr3.length; ++j) {
+                sum += arr1[i][1]*arr3[j];
+            }
+        }
+    }
+    
+    return sum;
+}
+
+console.log(findSum(a,b))
+
+// const demoPromiseSuccess2secs = new Promis((res, rej) => {
+//     setTimeout(() => { res("done") }, 2000)
+// })
+
+// const demoPromiseFail2secs = new Promis((res, rej) => {
+//     setTimeout(() => { rej("failed") }, 2000)
+// })
+
+
+// async function demo() {
+    
+//     demoPromiseSuccess2secs
+//     .then(data => { console.log(data)})
+//     .catch(err => { console.log(err)})
+    
+//     try {
+//         const data = await demoPromiseSuccess2secs();
+//     } catch (err) {
+//         // handle err
+//     }
+    
+// }
