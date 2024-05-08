@@ -1,0 +1,80 @@
+# **Objective:** Develop a Python script to analyze repositories of a given organization on GitHub and identify the contributors for each repo in the org.
+
+# **Input**: Organization name (ex: 'apache' / 'mozilla')
+
+# **Output**: Print each repo, along with their respective contributors(usernames)
+
+# These are the 2 api documentation that are relevant
+# 1. List org repos: https://docs.github.com/en/rest/repos/repos#list-organization-repositories
+# 2. List repo contributors: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repository-contributors
+
+# You don't need any auth tokens to make api calls (as long as it is with in rate limits). If you hit rate limits, use your personal github token.
+
+# ** Troubleshooting docs(Only if you face Github API calls issue) **
+# * https://docs.github.com/en/rest/using-the-rest-api/troubleshooting-the-rest-api?apiVersion=2022-11-28#user-agent-required
+import requests
+
+AUTH_TOKEN='get_token_from_github'
+
+headers = {'Authorization': f'Bearer {AUTH_TOKEN}'}
+
+
+def get_contributors(owner_name, repository_name):
+  contributors_url = f'https://api.github.com/repos/{owner_name}/{repository_name}/contributors'
+  contributors = requests.get(contributors_url, headers=headers).json()
+
+  contributors_name = []
+  for contributor in contributors:
+    contributors_name.append(contributor['login'])
+
+  return contributors_name
+
+
+def get_repositories(response):
+  repos = []
+  for repo_obj in response:
+    # print(repo_obj)
+    repos.append(repo_obj['full_name'].split('/')[1])
+  return repos
+
+
+def get_org_repos(org_name):
+  org_repos = {}
+
+  repos_url = f'https://api.github.com/orgs/{org_name}/repos'
+  repo_response = requests.get(repos_url, headers=headers).json()
+  # print(repo_response)
+
+  repositories = get_repositories(repo_response)
+  print(len(repositories))
+
+  # print(repositories)
+
+  for repo in repositories:
+    contributors = get_contributors(org_name, repo)
+    # print(contributors)
+    org_repos[repo] = contributors
+
+  return org_repos
+
+
+# get_org_repos('apache')
+
+
+def print_response(org_name):
+  data = get_org_repos(org_name)
+
+  for [repo_name, contributors] in data.items():
+    # print('Repo Name: - ', repo_name)
+    # print('Contributors: - ')
+    for contributor in contributors:
+      # print(contributor)
+      pass
+
+    # print('All contributors printed ------- ***')
+
+  # print(len(data.keys()))
+  # print(data)
+
+
+print_response('apache')
