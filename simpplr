@@ -1,0 +1,119 @@
+// user
+//     id primary
+//     first_name
+//     last_name
+    
+// cars
+//     id priamry
+//     make
+//     model
+//     user_id
+
+// services
+//     id primary
+//     type
+//     due_date
+//     car_id
+
+// id - user id
+
+// select 
+
+// users.first_name, users.last.name, cars.make, cars.model
+// services.type, services.due_date
+
+// from users join
+// cars on cars.user_id = users.id left join
+// services on services.car_id = cars.id
+// where users.id = id
+
+// user details
+// all the cars owned
+// all the services
+
+
+
+// const x = {
+// 	a: function() {
+// 		console.log(this)
+// 	},
+// 	b: function() {
+// 		function m(){
+// 			console.log(this)
+// 		}
+// 		m();
+// 	},
+// 	c: () => {
+// 		console.log(this)
+// 	},
+// 	d: () => {
+// 		const n = () => {
+// 			console.log(this)
+// 		};
+// 		n();
+// 	}
+// }
+// x.b()
+
+
+function x() {
+	console.log(1);
+	setTimeout(() => {console.log(2)}, 0); 
+	new Promise(resolve => 
+	resolve(console.log(3))).then(res => console.log(res));
+	new Promise(resolve => resolve(4)).then(res => console.log(res));
+	console.log(5);
+}
+
+// x()
+// 1
+// 5
+// 3
+// undefined
+// 4
+// 2
+
+console.log(1)
+console.log(2)
+new Promise(res => { 
+    console.log(3);
+    let i=0;
+    while(i < 1000000) { 
+        i++; 
+        
+    }
+    res(4)
+}).then(response => console.log(response))
+
+console.log(5)
+
+
+// 1
+// 2
+// 5
+// 3
+
+// 4
+
+
+// "()()","(())",")(())(("
+// [')', '(', '(']
+
+// function countUnmatchedPranthesis(paranthesis) {
+//     const arr = [];
+//     for (let i=0; i<paranthesis.length; ++i) {
+//         if (paranthesis[i] === '(') {
+//             arr.push(paranthesis[i]);
+//         } else {
+//             if (arr.length === 0) arr.push(paranthesis[i]); 
+//             else if (arr[arr.length - 1] === '(') {
+//                 arr.pop();
+//             } else {
+//                 arr.push(paranthesis[i]);
+//             }
+//         }
+//     }
+    
+//     return arr.length;
+// }
+// console.log(countUnmatchedPranthesis(")))))((((("))
