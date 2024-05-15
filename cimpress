@@ -1,0 +1,109 @@
+function highOrderFun() {
+    return function() {
+        // 
+    }
+}
+
+// url="xyz.com"
+
+// function fun() {
+    
+//     const response = fetch
+// }
+
+
+// Given a cart  with products and Coupons 
+
+// N% off coupons, such as a “10% off coupon”
+
+// P% off the next item coupons , such as “take 20% off the next item in your cart”
+
+// $D off of the Nth product of type T, such as “take $5 off your third business card holder”
+
+// $10 postcard sorter
+// Coupon: Take $2 off your 2nd postcard sorter
+// Coupon: 25% off each individual item
+// Coupon: Take 10% off the next item in the cart
+// 
+// $10 postcard sorter
+
+// Total = ($10 * 75%) + (($10 - $2) * 75% * 90%) = $7.50 + $5.40 = $12.90
+
+
+interface CouponItem {
+    type: "PRODUCT" | "COUPON"
+    percentage: Number
+    appliedOn: "ALL_ITEM" | "NEXT_ITEM" | "N%_ON_NTH_ITEM"
+    nth: Number
+    productType: String
+}
+
+interface Item {
+    type: "PRODUCT" | "COUPON"
+    price: Number
+    name: String
+    productType: String
+    price: Number
+    details: ...
+}
+
+class Cart {
+    const items: Items | CouptonItem [];
+    const nthItemCoupons = {};
+    const 
+    
+    function Cart() {
+        this.items = items;
+    }
+    
+    // function
+    
+    function getCartTotal() {
+        let cartTotal = 0;
+        
+        const allItemsCoupon = this.items.filter(item => item.type === 'COUPON' && item.appliedOn === 'ALL_ITEMS')
+        
+        const totalOffAllItems = allItemsCoupon.reduce((total, item) => total + item.percentage, 0);
+        
+        
+        const nthItemCoupon = this.items.forEach(item => 
+            { if (item.type === 'COUPON' && item.appliedOn === 'N%_ON_NTH_ITEM') {
+                
+                this.nthItemCoupons[item.productType] = {
+                    order: item.nth;
+                    percentage: item.percentage
+                }
+            }
+            });
+            
+        const productOrder = {};
+        
+        
+        this.items.forEarch((item, index) => {
+            const itemType = item.type;
+    
+            if (itemType === 'PRODUCT') {
+                if (productOrder[item.productType] !=== undefined) {
+                    productOrder[item.productType] += 1;
+                } 
+                
+                // apply all_items coupon
+                let effectivePrice = item.price - (item.price * totalOffAllItems)/100;
+                
+                // apply next item coupon if any
+                if (index > 0 && this.items[index-1].type === 'COUPON' && this.items[index-1].appliedOn === 'NEXT_ITEM') {
+                    effectivePrice -= (item.price*this.items[index-1].percentage)/100;
+                }
+                
+                // apply third type of coupon
+                if (this.nthItemCoupons[item.type] !== undefined) {
+                    this.nthItemCoupons[item.type]['order'] === productOrder[item.type]
+                } {
+                    effectivePrice -= (item.price*this.nthItemCoupons[item.type].percentage)/100;
+                }
+                
+                cartTotal += effectivePrice;
+            }
+        })
+    }
+}
