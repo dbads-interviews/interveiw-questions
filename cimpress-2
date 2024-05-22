@@ -1,0 +1,101 @@
+interface CouponType {
+    type: "COUPON" | "PRODUCT"
+    percentage: Number
+    couponType: "ALL_ITEM" | "NEXT_ITEM" | "NTH_ITEM"
+    order: Number
+    category: String
+}
+
+
+interface ProductType {
+    type: "COUPON" | "PRODUCT"
+    price: Number
+    category: String
+    applicablePrice: Number
+}
+
+// [{coupon_type: all_item|nth_item, percentage, order: }]
+
+/*
+{
+    all_item: [
+        {percentage}
+    ],
+    nth_item: {
+        category: {
+            order: { percentage: }
+        }
+    }
+}
+*/
+
+// {category: {order: 1, 2: {}, 1: {}, 2: {}}, currentOrder: 1}
+
+class ShoppingCart {
+    
+    let items: ProductType | CouponType [];
+    let coupons: CouponType[];
+    let itemOrder = {};
+    
+    function addTime() {}
+    
+    function applyAllCoupon(item, itemOrder) {
+        const coupons = this.coupons;
+        let actualPrice = item.price;
+        for (let i=0; i<coupons.length; ++i) {
+            if (coupon.couponType === 'ALL_ITEM') {
+                actualPrice -= (actualPrice*item.percentage)/100;
+            } else {
+                // else it will be of nth_item type
+                if (item.category === coupon.category && itemOrder[item.category] !== undefined && itemOrder[item.category][coupon.order]) {
+                    actualPrice -= (actualPrice*coupon.percentage)/100;
+                }
+            }
+        }
+        return actualPrice;
+    }
+    
+    
+    function findApplicablePrices() {
+        const items = this.items;
+        let cartTotal = 0;
+        let itemOrder = {};
+
+        for (let i=0; i< items.length; ++i) {
+            const item = items[i];
+            let itemApplicablePrice = item.price;
+            if (item.type === "PRODUCT") {
+                // apply all the applicable coupons
+                itemApplicablePrice -= this.applyAllCoupons(item);
+                
+                // apply nth_item coupon
+                if (i>0 && items[i-1].type === 'COUPON' and item.couponType === 'NEXT_ITEM') {
+                    itemApplicablePrice -= (cartTotal*items[i-1].percentage)/100;
+                }
+                
+                if (this.itemOrder[item.category] !== undefined) {
+                    let currentOrder = this.itemOrder[item.category].[order] || 0 + 1;
+                    this.itemOrder[item.category][currentOrder] = item
+                }
+                
+                item.itemApplicablePrice = itemApplicablePrice;
+            } else {
+                this.coupons.push(item);
+                if (item.couponType === 'ALL_ITEM') {
+                    this.items.slice(0,i).forEach(item => {
+                        item.applicablePrice -= (item.itemApplicablePrice*item.percentage)/100;
+                    })
+                } else if (item.couponType === 'NTH_ITEM') {
+                
+                    this.items.slice(0,i).forEach((item, index) => {
+                          if (item.category === coupon.category && itemOrder[item.category] !== undefined && itemOrder[item.category][coupon.order]) {
+                    item.applicablePrice -= (item.applicalePrice*coupon.percentage)/100;
+                    }
+                    })
+                }
+            }
+            
+        }
+        
+    }
+}
