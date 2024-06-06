@@ -1,0 +1,40 @@
+question:
+
+https://leetcode.com/problems/join-two-arrays-by-id/description/
+
+/**
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @return {Array}
+ */
+
+var join = function(arr1, arr2) {
+    const all_ids = {};
+    let smallest = Number.MAX_SAFE_INTEGER;
+    let largest = arr1[0].id;
+    for (let i=0; i<arr1.length; ++i) {
+        all_ids[arr1[i].id] = {...arr1[i]};
+        smallest = Math.min(arr1[i].id, smallest);
+        largest = Math.max(arr1[i].id, largest);
+    }
+
+    for (let i=0; i<arr2.length; ++i) {
+        let obj = arr2[i];
+        if(all_ids[obj.id] !== undefined) {
+            all_ids[obj.id] = {...all_ids[obj.id], ...obj};
+        } else {
+            all_ids[obj.id] = {...all_ids[obj.id], ...obj};
+        }
+        smallest = Math.min(arr2[i].id, smallest);
+        largest = Math.max(arr2[i].id, largest);
+    }
+
+    let ans = [];
+    // console.log(all_ids, smallest, largest);
+    for (let i=smallest; i<=largest; ++i) {
+        ans.push(all_ids[i]);
+    }
+    
+
+    return ans;
+};
