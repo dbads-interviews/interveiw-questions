@@ -1,0 +1,41 @@
+// SELECT 
+//     e.first_name, 
+//     e.last_name, 
+//     d.department_name, 
+//     e.salary
+// FROM 
+//     employees e
+// JOIN 
+//     departments d ON e.department_id = d.department_id
+// WHERE 
+//     e.salary > 50000
+// ORDER BY 
+//     e.salary DESC;
+
+// FROM 
+// JOIN 
+// WHERE
+// ORDER BY
+// LIMIT
+// SELECT
+
+// function calculateAverage(numbers) {
+//     let total = 0;
+//     for (let i = 0; i < numbers.length; i++) {
+//         total += numbers[i];
+//     }
+    
+//     let average = total / numbers.length;
+    
+//     return average;
+// }
+
+// // Example usage:
+// const nums = [1, 2, 3, 4, 5,6];
+// console.log(calculateAverage(nums)); // Expected output: 3
+
+
+// const obj1 = {}
+// const obj2 = {}
+
+// const mergedObj = {...obj1, ...obj2}
