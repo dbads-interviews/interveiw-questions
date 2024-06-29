@@ -1,0 +1,180 @@
+Round 1 --
+
+
+Project Scheduling with Resource Constraints:
+
+You are managing a project with n tasks, each represented by a tuple (id, duration, resources), where:
+
+ id is a unique identifier for the task,
+ Duration is the time required to complete the task,
+ Resources is a list of tuples (resource_id, quantity) representing the resources required for the task, where resource_id is the identifier for the resource and quantity is the amount required.
+
+You have a limited pool of resources, each represented by a tuple (resource_id, available_quantity) indicating the available quantity of each resource.
+
+Your goal is to schedule the tasks to minimise the project completion time while respecting the resource constraints.
+Tasks can only start if all their required resources are available.
+
+
+Example 1:
+
+const tasks = [
+    [1, 4, [['A', 1], ['B', 1]]],  // Task ID 1, Duration 4, Requires 1 unit of Resource A and 1 unit of Resource B
+    [2, 5, [['C', 2], ['D', 1]]],  // Task ID 2, Duration 5, Requires 2 units of Resource C and 1 unit of Resource D
+    [3, 3, [['A', 2], ['B', 1]]]   // Task ID 3, Duration 3, Requires 2 units of Resource A and 1 unit of Resource C
+];
+
+const resources = [
+    ['A', 3],   // Resource A: 3 units available
+    ['B', 2],   // Resource B: 2 units available
+    ['C', 2],   // Resource C: 2 units available
+    ['D', 1]    // Resource D: 1 unit available
+];
+
+Expected Output:
+
+A 1
+B 1
+
+A 2
+B 1
+
+Minimum completion time: 5
+Schedule: [1, 2, 3]
+
+
+
+
+
+Example 2: 
+const tasks = [
+    [1, 4, [['A', 1], ['B', 2]]],  // Task ID 1, Duration 4, Requires 1 unit of Resource A and 2 units of Resource B
+    [2, 3, [['C', 1], ['D', 1]]],  // Task ID 2, Duration 3, Requires 1 unit of Resource C and 1 unit of Resource D
+    [3, 5, [['A', 2], ['D', 1]]]   // Task ID 3, Duration 5, Requires 2 units of Resource A and 1 unit of Resource D
+];
+
+const resources = [
+    ['A', 2],   // Resource A: 2 units available
+    ['B', 3],   // Resource B: 3 units available
+    ['C', 1],   // Resource C: 1 unit available
+    ['D', 2]    // Resource D: 2 units available
+];
+
+resources {
+	a:2
+b:2
+c:1
+d:1
+}
+
+tasks = 1,2,3
+
+scheduled = {1,2,3}
+tobesch = [3]
+
+for i=1 to i=12 {
+	5
+5+4
+break
+}
+
+
+
+
+function schedule() {
+let taksToBeScheduled = tasks.map(task => taks[0]);
+
+const resources = {}
+const scheduled = {}
+const maxTime = tasks.reduce((total, task) => total+task[1], 0)
+
+const taskResouceMapping = {}
+tasks.forEach(task => {
+	taskResouceMapping[task[0]] = {}
+task[2].forEach(resouce = > 	taskResouceMapping[task[0]][resource[0]]=resource[1])
+}) 
+
+for (let i=1; i<=maxTime; ++i) {
+
+while (task_to_be_scheduled.length >0) {
+	const currentTaskResouceNeeded = {}
+for ( resource in taskResourceMapping[taskToBeScheduled[0]) {
+	if (resources[resource] < 0) break
+}
+
+// schedule this task and reduce the resources
+scheduled.push[task]
+
+if (tasktobescheduled.length == 1) {
+	
+	total_time = i+timeTakenfor thistask
+}
+
+// release the resource for existing scheduled tasks
+}
+
+return [totaltimetake, scheduled]
+}
+
+
+
+Expected Output:
+Minimum completion time: 9
+Schedule: [2, 1, 3]
+
+
+
+
+-------------------
+
+Q2.
+
+The Next Palindrome
+
+A positive integer is called a palindrome if its representation in the decimal system is the same when read from left to right and from right to left. For a given positive integer K of not more than 1000000, write the value of the smallest palindrome larger than K to output. Numbers are always displayed without leading zeros.
+Input
+The integer K
+Output
+output the smallest palindrome larger than K.
+Example
+Input:
+808
+Output:
+818
+
+Input:
+2121
+Output:
+2222
+
+
+2321
+
+808
+
+
+2121
+2222
+
+45 321
+45354
+
+
+11 4 11 - 12 4 11
+
+
+34 55 43
+
+12341
+
+52345
+54345
+
+
+12921
+
+888
+
+
+
+
+
