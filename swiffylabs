@@ -1,0 +1,31 @@
+Users
+	- type {Restaurant, deliveryBoy, Ops}
+
+Subscription
+	- type
+	- products
+	- startDate
+	- 
+
+Products
+
+Order
+
+Payment
+	- 
+
+app.get('/', handlerFun);
+
+
+
+handlerFun(req, res, next) {
+	// process
+	res.send(data).staus(200);
+}
+
+
+errorHandler(err, req, res, next) {
+	
+}
+
+app.use(errorHandler);
