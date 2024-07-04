@@ -1,0 +1,133 @@
+class Singleton {
+	private obj
+	Singleton() {
+		if (obj == null) {
+
+		}
+	}
+}
+
+
+
+
+class parent {
+
+	fun(){parent}
+
+}
+
+class child extends parent{
+
+fun(){child}
+}
+
+
+child obj = new parent();
+Obj.fun() 
+
+parent obj = new child();
+Obj.fun() 
+
+
+……………...
+class parent {
+
+
+
+
+}
+
+class child extends parent {
+
+fun(){child}
+}
+
+
+child obj = new parent();
+Obj.fun() child
+
+parent obj = new child();
+Obj.fun()  null
+
+………
+
+class parent {
+
+
+fun(){parent}
+
+}
+
+class child extends parent{
+
+
+}
+
+
+child obj = new parent();
+Obj.fun()
+
+
+
+parent obj = new child();
+Obj.fun()
+
+………
+
+class parent {
+
+
+static fun(){parent}
+
+}
+
+class child extends parent{
+
+static  fun(){child}
+}
+
+
+child obj = new parent();
+Obj.fun()
+
+parent obj = new child();
+Obj.fun()
+
+
+
+
+
+
+
+
+
+
+Requirement
+
+
+interface SpecialInterface (
+	fun1() 
+	fun2()
+	fun3()
+	fun4()
+	fun5()
+)
+
+class SpecailClass1 {
+	public fun1() 
+	public fun2()
+	fun3()
+	fun4()
+	fun5()
+}
+
+class SpecailClass2 {
+	fun1() 
+	fun3()
+}
+
+class SpecailClass3 {
+	fun1() 
+	fun2()
+	fun3()
+}
