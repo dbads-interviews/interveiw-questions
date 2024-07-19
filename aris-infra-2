@@ -1,3 +1,167 @@
+Expense App
+
+Users can add expense, multiple users can be the part of an expense
+Expense can divided among the participants - EQUALLY  
+User can settle balance with other users
+User should be able to see how much he owe & whom
+
+
+Bonus: 
+Users can be part of group
+User can add expenses to the group 
+User can edit expenses added to the group 
+User can delete the expenses added to the group
+Expense in group can be divided among the participants - Ratio/Percentage 
+Minimise the number of transactions in the group
+Ex:  Bob owes Alice $10, and Carol owes Bob $10.
+       A single transaction where Carol pays $10 directly to Alice.
+
+
+# Expense App
+
+# Users can add expense, multiple users can be the part of an expense
+# Expense can divided among the participants - EQUALLY  
+# User can settle balance with other users
+# User should be able to see how much he owe & whom
+
+
+# Entities
+# - Expense
+# - User
+
+# Functionalities
+# - add a expense
+# - split it
+# - settle balance with users
+# - User should be able to see how much he owe & whom
+
+
+# all_users = {
+#     id: {
+#         name: 
+#         transactions: {
+#             id: 
+#         }
+#     }
+# }
+
+transactions = {
+    # u1: {
+    #     # u2:12,
+    #     # u3: -20,
+    # }
+}
+
+expenses = {
+    # id: {
+    #     users: {
+            
+    #     },
+    #     amount: 100,
+    #     # ...other attributes,
+    # }
+}
+import random
+
+class User:
+    def __init__(self, userDetails):
+        self.name = userDetails['name']
+        self.id = random.randint(1,10000000)
+    
+
+class Expense:
+    users = {}
+    def __init__(self, amount, users, payer, type=None):
+        self.amount = amount
+        self.id = random.randint(1,1000000)
+        
+        if type == 'settlement':
+            user1 = users[0]
+            user2 = users[1]
+            user1.share = 0
+            user2.share =amount
+            transactions[user1.id][user2.id] = 0
+            transactions[user2.id][user1.id] = 0
+            self.users[user1.id] = user1
+            self.users[user2.id] = user2
+        
+        else:
+            each_user_share = amount/len(users)
+            for user in users:
+                user.share = each_user_share
+                self.users[user.id] = user
+            
+                # self.users[user.id] = user
+                
+                if user.id != payer.id:
+                    if user.id in transactions:
+                        if payer.id in transactions[user.id]:
+                            transactions[user.id][payer.id] -= each_user_share
+                        else:
+                            transactions[user.id] = { payer.id: -1*each_user_share}
+                    else:
+                        transactions[user.id]={ payer.id: -1*each_user_share}
+                    
+                    if payer.id in transactions:
+                        if user.id in transactions[payer.id]:
+                            transactions[payer.id][user.id] += each_user_share
+                        else:
+                            transactions[payer.id][user.id] =  each_user_share
+                    else:
+                        transactions[payer.id]={ user.id: each_user_share}
+        
+    # def add_user(self, user):
+    #     self.users[user.id]= user
+    
+
+# add expense and split 
+user1 = User({'name': 'Deepak'})
+user2 = User({'name': 'Sumit'})
+user3 = User({'name': 'Mahesh'})
+payer = user1
+new_expense = Expense(300, [user1, user2, user3], payer)
+print(new_expense.amount, new_expense.users)
+expenses[new_expense.id] = new_expense
+
+print(expenses)
+
+
+print('user1', user1.id)
+print('user2', user2.id)
+print('user3', user3.id)
+
+
+def listBalances(user):
+    print(transactions)
+    balances = transactions[user.id]
+    for [userid, balance] in balances.items():
+        if balance > 0:
+            print(f'{user.id} has given {balance} to {userid}')
+        elif balance < 0:
+            print(f'{user.id} owes {balance} to {userid}')
+            
+listBalances(user1)
+print('after listing')
+
+# settle balance
+# user1 wants to settle balances with user2
+def settle(user1, user2):
+    # step 1
+    # transactions[user1.id][user2.id] = 0
+    print(transactions[user1.id][user2.id])
+    expense = Expense(transactions[user1.id][user2.id], [user1, user2], user1, 'settlement')
+    expenses[expense.id] = expense
+    
+    # step 2
+
+settle(user2, user1)
+
+print(transactions)
+
+
+
+
+
 # Expense App
 
 # Users can add expense, multiple users can be the part of an expense
